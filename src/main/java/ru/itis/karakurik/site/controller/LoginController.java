@@ -1,20 +1,19 @@
 package ru.itis.karakurik.site.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import ru.itis.karakurik.site.dto.LoginForm;
 import ru.itis.karakurik.site.service.UserService;
 
 import javax.validation.Valid;
 
+@RequiredArgsConstructor
 @Controller
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping(value = "/login")
     public String getLoginPage() {
@@ -22,7 +21,7 @@ public class LoginController {
     }
 
     @PostMapping(value = "/login")
-    public String login(@Valid @RequestBody LoginForm form) {
+    public String login(@Valid LoginForm form) {
         userService.login(form);
         return "redirect:/";
     }
