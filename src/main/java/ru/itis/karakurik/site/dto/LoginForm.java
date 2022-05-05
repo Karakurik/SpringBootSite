@@ -13,8 +13,8 @@ import javax.validation.constraints.NotBlank;
 @Builder
 public class LoginForm {
 
-    @NotBlank(message = "Имя пользователя или email не можеть быть пустым")
-    private String usernameOrEmail;
+    @NotBlank(message = "Email не можеть быть пустым")
+    private String email;
 
     @NotBlank(message = "Пароль не может быть пустым")
     private String password;

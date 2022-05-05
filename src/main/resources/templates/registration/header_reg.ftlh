@@ -1,13 +1,13 @@
 <#ftl encoding="UTF-8"/>
-<#import "spring.ftl" as spring/>
+<#import "/spring.ftl" as spring/>
 
-<#macro header_signUp>
+<#macro header_reg>
     <header>
         <div class="content">
             <p class="title">
                 <span class="text">
                     <img class="logo"
-                         src="<@spring.url "/resources/images/book.jpg"/>"
+                         src="<@spring.url "/static/images/book.jpg"/>"
                          width="77" height="77"
                          alt="Логотип">
                 </span></p>

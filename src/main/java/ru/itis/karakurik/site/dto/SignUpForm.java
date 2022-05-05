@@ -16,9 +16,6 @@ import javax.validation.constraints.NotBlank;
 @EqualPasswords(password = "password", passwordRepeat = "passwordRepeat")
 public class SignUpForm {
 
-    @NotBlank(message = "Имя пользователя не может быть пустым")
-    private String username;
-
     @NotBlank(message = "Email  не может быть пустым")
     @Email
     private String email;

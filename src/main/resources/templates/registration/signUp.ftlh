@@ -1,30 +1,10 @@
-<#ftl encoding="UTF-8"/>
-<html lang="ru">
-<#import "spring.ftl" as spring/>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="<@spring.url "/static/css/indexPageStyle.css"/>">
-    <title>Онлайн библиотека::Регистрация</title>
-</head>
+<#import 'layout_reg.ftlh' as layout>
+<#import '/spring.ftl' as spring>
 
-<body>
-<div class="main">
-    <header>
-        <div class="content">
-            <p class="title">
-                <span class="text">
-                    <img class="logo"
-                         src="<@spring.url "/static/images/book.jpg"/>"
-                         width="77" height="77"
-                         alt="Логотип">
-                </span></p>
-            <p class="title">Онлайн библиотека</p>
-            <p style="text-align: center" class="text">Добро пожаловать в онлайн библиотеку.</p>
-        </div>
-    </header>
+<@layout.layout_reg "Онлайн библиотека::Регистрация">
     <div class="login_div">
         <p class="title">Регистрация:</p>
-        <form class="login_form" method="post">
+        <form method="post" action="<@spring.url "/signUp"/>" class="login_form">
             <label class="registration-form-elem">
                 <input type="text" name="firstName" placeholder="Имя" size="20">
             </label>
@@ -35,21 +15,18 @@
                 <input type="email" name="email" placeholder="Email" size="20">
             </label>
             <label class="registration-form-elem">
-                <input type="text" name="username" placeholder="Юзернейм" size="20">
-            </label>
-            <label class="registration-form-elem">
                 <input type="password" name="password" placeholder="Пароль" size="20">
             </label>
             <label class="registration-form-elem">
                 <input type="password" name="passwordRepeat" placeholder="Повторите пароль" size="20">
             </label>
-            <#--        <p class="message">${message}</p>-->
+<#--            <p class="message">${message}</p>-->
             <br>
             <label class="registration-form-elem">
                 <input type="submit" value="Зарегистрироваться">
             </label>
+<#--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
             <p class="title"><a href="<@spring.url "/login"/>">Уже есть аккаунт?</a></p>
         </form>
     </div>
-</div>
-<body>
+</@layout.layout_reg>
