@@ -27,13 +27,11 @@ public class SignUpController {
 
     private final UserService userService;
 
-    @PreAuthorize("permitAll()")
     @GetMapping(value = "/signUp")
     public String getSignUpPage() {
         return "registration/signUp";
     }
 
-    @PreAuthorize("permitAll()")
     @PostMapping(value = "/signUp")
     public String signUp(@Valid SignUpForm form) {
         userService.signUp(form);

@@ -1,31 +1,24 @@
-<#ftl encoding='UTF-8'>
+<#import 'layout_reg.ftlh' as layout>
 <#import '/spring.ftl' as spring>
-<html>
-<head>
-    <link href="/css/styles.css" rel="stylesheet">
-    <link href="/css/bootstrap.min.css" rel="stylesheet"/>
-</head>
-<body>
-<#if error??>
-<div class="alert alert-danger" role="alert">Логин или пароль введены неверно</div>
-</#if>
-<div class="form-style-2">
-    <div class="form-style-2-heading">
-        Please Login!
+
+<@layout.layout_reg "Онлайн библиотека::Вход">
+    <div class="login_div">
+        <p class="title">Вход:</p>
+        <form method="POST" action="<@spring.url "/login" />" class="login_form">
+            <label class="form-elem">
+                <input type="email" name="email" size="20" placeholder="Email"/>
+            </label>
+            <label class="form-elem">
+                <input type="password" name="password" value="" size="20" placeholder="Пароль"/>
+            </label>
+            <#--            <p class="message">${message}</p>-->
+            <label class="form-elem">
+                <input type="checkbox" id="remember-me" name="remember-me">Запомнить меня
+            </label>
+            <label class="form-elem">
+                <input type="submit" value="Войти" class="form-elem"/>
+            </label>
+            <p class="title"><a href="<@spring.url "/registration" />">Создать аккаунт?</a></p>
+        </form>
     </div>
-    <form method="post" action="<@spring.url "/login"/>">
-        <label for="login">Логин
-            <input class="input-field" type="text" id="login" name="login">
-        </label>
-        <br>
-        <label for="password">Пароль
-            <input class="input-field" type="password" id="password" name="password">
-        </label>
-        <br>
-        <label for="remember-me">
-            <input type="checkbox" id="remember-me" name="remember-me">Запомнить меня</label>
-        <input type="submit" value="Login">
-    </form>
-</div>
-</body>
-</html>
+</@layout.layout_reg>

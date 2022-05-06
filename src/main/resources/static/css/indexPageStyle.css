@@ -28,14 +28,19 @@ body {
 }
 
 .login_form {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
     text-align: center;
-    padding: 20px;
 }
 
 .login_div {
-    height: 300px;
+    height: auto;
     display: flex;
     flex-direction: column;
+    align-content: center;
+    align-items: center;
     width: 300px;
     border: 1px solid #eaeaea;
     margin: 0 auto;
@@ -63,8 +68,12 @@ body {
     padding: 10px;
 }
 
-.registration-form-elem {
-    margin: 5px;
+.form-elem {
+    display: flex;
+    margin: 2px;
+    flex-direction: row;
+    align-items: baseline;
+    align-content: center;
 }
 
 header {
@@ -73,6 +82,7 @@ header {
 
 .message {
     color: red;
+    margin: 5px;
 }
 
 .login_reg {

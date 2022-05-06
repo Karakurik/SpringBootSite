@@ -23,6 +23,6 @@ public class LoginController {
     @PostMapping(value = "/login")
     public String login(@Valid LoginForm form) {
         userService.login(form);
-        return "redirect:/";
+        return "redirect:/hello";
     }
 }

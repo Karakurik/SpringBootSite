@@ -5,24 +5,24 @@
     <div class="login_div">
         <p class="title">Регистрация:</p>
         <form method="post" action="<@spring.url "/signUp"/>" class="login_form">
-            <label class="registration-form-elem">
+            <label class="form-elem">
                 <input type="text" name="firstName" placeholder="Имя" size="20">
             </label>
-            <label class="registration-form-elem">
+            <label class="form-elem">
                 <input type="text" name="lastName" placeholder="Фамилия" size="20">
             </label>
-            <label class="registration-form-elem">
+            <label class="form-elem">
                 <input type="email" name="email" placeholder="Email" size="20">
             </label>
-            <label class="registration-form-elem">
+            <label class="form-elem">
                 <input type="password" name="password" placeholder="Пароль" size="20">
             </label>
-            <label class="registration-form-elem">
+            <label class="form-elem">
                 <input type="password" name="passwordRepeat" placeholder="Повторите пароль" size="20">
             </label>
 <#--            <p class="message">${message}</p>-->
             <br>
-            <label class="registration-form-elem">
+            <label class="form-elem">
                 <input type="submit" value="Зарегистрироваться">
             </label>
 <#--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->

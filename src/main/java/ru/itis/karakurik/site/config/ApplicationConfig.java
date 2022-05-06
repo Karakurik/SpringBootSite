@@ -16,7 +16,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @ComponentScan(basePackages = {
         "ru.itis.karakurik.site.service",
-        "ru.itis.karakurik.site.controller"
+        "ru.itis.karakurik.site.controller",
+        "ru.itis.karakurik.site.security"
 })
 @EntityScan(basePackages = "ru.itis.karakurik.site.model")
 @EnableJpaRepositories(basePackages = "ru.itis.karakurik.site.repository")
