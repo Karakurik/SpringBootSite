@@ -1,11 +1,10 @@
 package ru.itis.karakurik.site.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -33,12 +32,14 @@ public class Book {
     @JoinColumn(name = "genre_id")
     private Genre genre;
 
+    @ToString.Exclude
+    @JsonBackReference
     @ManyToMany
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id")
+    @JoinTable(name = "book_author",
+            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id")
     )
-    private Set<Author> authors;
+    private List<Author> authors;
 
     private int publishDate;
 
@@ -46,5 +47,5 @@ public class Book {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    private byte[] image;
+    private Byte[] image;
 }

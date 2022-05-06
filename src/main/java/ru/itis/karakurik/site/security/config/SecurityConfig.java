@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import ru.itis.karakurik.site.model.Role;
 import ru.itis.karakurik.site.security.details.CustomUserDetailsService;
 
 import javax.sql.DataSource;
@@ -39,6 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signUp/**").permitAll()
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/hello/**").permitAll()
+                .antMatchers("/admin/**").hasAuthority(Role.ROLE_ADMIN.name())
                 .antMatchers("/").authenticated()
                 .antMatchers("/static/**").permitAll()
                 .anyRequest().authenticated()

@@ -37,30 +37,4 @@ public class SignUpController {
         userService.signUp(form);
         return "redirect:/login";
     }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ValidationExceptionResponse handleException(MethodArgumentNotValidException exception) {
-        List<ValidationErrorDto> errors = new ArrayList<>();
-        exception.getBindingResult().getAllErrors().forEach((error) -> {
-
-            String errorMessage = error.getDefaultMessage();
-            ValidationErrorDto errorDto = ValidationErrorDto.builder()
-                    .message(errorMessage)
-                    .build();
-
-            if (error instanceof FieldError) {
-                String fieldName = ((FieldError) error).getField();
-                errorDto.setField(fieldName);
-            } else if (error instanceof ObjectError) {
-                String objectName = error.getObjectName();
-                errorDto.setObject(objectName);
-            }
-            errors.add(errorDto);
-        });
-
-        return ValidationExceptionResponse.builder()
-                .errors(errors)
-                .build();
-    }
 }

@@ -20,12 +20,14 @@
             <label class="form-elem">
                 <input type="password" name="passwordRepeat" placeholder="Повторите пароль" size="20">
             </label>
-<#--            <p class="message">${message}</p>-->
+            <#if message??>
+                <p class="message">${message}</p>
+            </#if>
             <br>
             <label class="form-elem">
                 <input type="submit" value="Зарегистрироваться">
             </label>
-<#--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
+            <#--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">-->
             <p class="title"><a href="<@spring.url "/login"/>">Уже есть аккаунт?</a></p>
         </form>
     </div>

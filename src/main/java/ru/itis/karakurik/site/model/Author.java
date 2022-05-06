@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -21,10 +22,6 @@ public class Author {
     @Column(unique = true, nullable = false)
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id")
-    )
-    private Set<Book> books;
+    @ManyToMany(mappedBy = "authors")
+    private List<Book> books;
 }
