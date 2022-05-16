@@ -15,7 +15,6 @@ import java.util.Set;
 @Data
 @RequiredArgsConstructor
 @AllArgsConstructor
-
 @Builder
 public class BookDto {
     private Long id;
@@ -27,7 +26,7 @@ public class BookDto {
     private String author;
     private int publishDate;
     private String publisher;
-    private Byte[] image;
+    private byte[] image;
 
     public static BookDto from(Book book) {
         return BookDto.builder()

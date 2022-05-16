@@ -45,11 +45,11 @@ public class ExceptionHandlerResponse {
                 .build();
     }
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(Exception.class)
-    public String serverException() {
-        return "exception/exception_page";
-    }
+//    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//    @ExceptionHandler(Exception.class)
+//    public String serverException() {
+//        return "exception/exception_page";
+//    }
 
 //    @ResponseStatus(HttpStatus.NOT_FOUND)
 //    @ExceptionHandler(Exception.class)

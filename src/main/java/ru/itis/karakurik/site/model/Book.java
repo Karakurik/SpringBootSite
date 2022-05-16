@@ -5,7 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @RequiredArgsConstructor
@@ -47,5 +46,5 @@ public class Book {
     @JoinColumn(name = "publisher_id")
     private Publisher publisher;
 
-    private Byte[] image;
+    private byte[] image;
 }

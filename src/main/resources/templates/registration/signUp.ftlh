@@ -15,10 +15,10 @@
                 <input type="email" name="email" placeholder="Email" size="20">
             </label>
             <label class="form-elem">
-                <input type="password" name="password" placeholder="Пароль" size="20">
+                <input type="password" name="password" placeholder="Пароль" size="20" id="password">
             </label>
             <label class="form-elem">
-                <input type="password" name="passwordRepeat" placeholder="Повторите пароль" size="20">
+                <input type="password" name="passwordRepeat" placeholder="Повторите пароль" size="20" id="passwordRepeat">
             </label>
             <#if message??>
                 <p class="message">${message}</p>
