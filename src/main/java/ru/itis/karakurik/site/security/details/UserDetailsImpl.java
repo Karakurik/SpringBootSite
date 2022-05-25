@@ -3,15 +3,15 @@ package ru.itis.karakurik.site.security.details;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ru.itis.karakurik.site.model.State;
-import ru.itis.karakurik.site.model.User;
+import ru.itis.karakurik.site.model.user.State;
+import ru.itis.karakurik.site.model.user.User;
 
 import java.util.Collection;
 import java.util.Collections;
 
 public class UserDetailsImpl implements UserDetails {
 
-    private User user;
+    private final User user;
 
     public UserDetailsImpl(User user) {
         this.user = user;

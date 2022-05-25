@@ -8,25 +8,23 @@
         <div class="descr">
             <h3>
                 Привет, друг! Это наша онлайн библиотека
-                <#if requestScope??>
-                    <#if requestScope.auth == true>
-                        <a style="color: #84bbf3" href="<@spring.url "logout"/>">Выйти</a>
-                    </#if>
+                <#if isAdmin??>
+                    <a style="color: #84bbf3" href="<@spring.url "/logout"/>">Выйти</a>
                     <br>
-                    <#if requestScope.isAdmin == true>
+                    <#if isAdmin == true>
                         <a style="color: #84bbf3" href="<@spring.url "/admin/"/>">АдминПанель</a>
                     </#if>
                 </#if>
             </h3>
         </div>
 
-        <div class=" search_form">
-            <form name="search_form" action="books" method="POST">
-                <input type="text" name="search_string"
-                        <#if search_string??>value=${search_string}</#if>
+        <div class="search_form">
+            <form name="search_form" action="<@spring.url "/books"/>" method="POST">
+                <input type="text" name="searchString"
+                       <#if search_string??>value=${search_string}</#if>
                        size="110"/>
                 <input class="search_button" type="submit" value="Поиск" name="search_button"/>
-                <select name="search_option">
+                <select name="searchOption">
                     <option>Название</option>
                     <option>Автор</option>
                 </select>

@@ -6,19 +6,20 @@
         <p class="title">Вход:</p>
         <form method="POST" action="<@spring.url "/login" />" class="login_form">
             <label class="form-elem">
-                <input type="email" name="email" size="20" placeholder="Email"/>
+                <input type="email" name="email" size="20" placeholder="Email" value="${email!}"/>
             </label>
             <label class="form-elem">
                 <input type="password" name="password" value="" size="20" placeholder="Пароль"/>
             </label>
-            <#--            <p class="message">${message}</p>-->
+            <p class="message">${message!}</p>
             <label class="form-elem">
                 <input type="checkbox" id="remember-me" name="remember-me">Запомнить меня
             </label>
             <label class="form-elem">
                 <input type="submit" value="Войти" class="form-elem"/>
             </label>
-            <p class="title"><a href="<@spring.url "/registration" />">Создать аккаунт?</a></p>
+            <p class="title"><a href="<@spring.url "/signUp" />">Создать аккаунт?</a></p>
+            <p class="title"><a href="<@spring.url "/resetPassword" />">Забыли пароль?</a></p>
         </form>
     </div>
 </@layout.layout_reg>

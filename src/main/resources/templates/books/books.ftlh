@@ -26,10 +26,7 @@
                     <p>${book.getName()}</p>
                 </div>
                 <div class="book_image">
-                    <#assign book=book>
-<#--                    <img src="data:image/jpeg,${book.getImage()}" height="250"-->
-<#--                    width="190" alt="Обложка">-->
-                    <img src="<@spring.url "/showImage?index=${book_index}"/>" height="250"
+                    <img src="<@spring.url "/showImage?id=${book.getId()}"/>" height="250"
                          width="190" alt="Обложка"/>
                 </div>
                 <div class="book_details">

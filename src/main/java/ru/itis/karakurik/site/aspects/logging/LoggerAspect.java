@@ -1,20 +1,28 @@
 package ru.itis.karakurik.site.aspects.logging;
 
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 @Aspect
+@Component
+@Slf4j
 public class LoggerAspect {
 
-    private static final Logger logger = (Logger) LoggerFactory.getLogger(LoggerAspect.class);
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @AfterThrowing(pointcut = "execution(* ru.itis.karakurik.site.controller..*(..))", throwing = "ex")
+    public void catchException(Exception ex) {
+        logger.error("Error: ", ex);
+    }
 
     @Pointcut("@annotation(ru.itis.karakurik.site.aspects.logging.Logger)")
     public void logAspectAnnotation() {
