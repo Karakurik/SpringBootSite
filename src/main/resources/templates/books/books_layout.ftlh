@@ -13,7 +13,7 @@
     <body>
     <div class="container">
         <@header.books_header/>
-<#--        <@left_menu.left_menu/>-->
+        <@left_menu.left_menu/>
         <#nested>
         <@footer.books_footer/>
     </div>

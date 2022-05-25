@@ -15,7 +15,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query(
             "SELECT b FROM Book b " +
-                    "WHERE b.genre.id = :id"
+            "WHERE b.genre.id = :id"
     )
     List<Book> findAllByGenreId(
             @Param("id") Long id

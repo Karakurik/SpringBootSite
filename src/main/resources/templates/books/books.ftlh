@@ -1,19 +1,9 @@
 <#import 'books_layout.ftlh' as layout>
 <#import '/spring.ftl' as spring>
+<#import 'book_list.ftlh' as books>
 
 <@layout.books_layout "Книги">
-    <div class="sidebar1">
-        <h4>Жанры:</h4>
-        <ul class="nav">
-            <#list genres! as genre>
-                <li>
-                    <a class="genre" href="<@spring.url "books?genre_id=${genre.getId()}&name=${genre.getName()}"/>">${genre.getName()}</a>
-                </li>
-            </#list>
-        </ul>
-    </div>
-
-    <div class="book_list">
+    <div class="book_list" id="book_list">
         <#if isBooksExists?? && isBooksExists = true >
             <h3>${RequestParameters.name!}</h3>
         <#else>
@@ -28,7 +18,7 @@
                     <p>${book.getName()}</p>
                 </div>
                 <div class="book_image">
-                    <img src="<@spring.url "/showImage?id=${book.getId()}"/>" height="250"
+                    <img id="image" src="<@spring.url "/showImage?id=${book.getId()}"/>" height="250"
                          width="190" alt="Обложка"/>
                 </div>
                 <div class="book_details">

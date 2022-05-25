@@ -32,12 +32,35 @@ public class BooksController {
         return "books/books";
     }
 
+    @GetMapping("/books/genre")
+    public String getAllBooks(
+            ModelMap map,
+            @RequestParam(name = "genre_id", required = false) Long genreId
+    ) {
+        map.addAttribute("genreId", genreId);
+
+        List<BookDto> books;
+        if (genreId == null) {
+            books = bookService.getAllBooks();
+        } else {
+            books = bookService.getBooksByGenre(genreId);
+        }
+
+        map.put("isBooksExists", !books.isEmpty());
+
+        if (books.isEmpty()) {
+            books = bookRepository.getAllBooksWhichInFavourite().stream().map(BookDto::from).collect(Collectors.toList());
+        }
+
+        map.put("list", books);
+        return "books/book_list";
+    }
+
     @GetMapping("/books")
     public String getBooks(
             ModelMap model,
             @AuthenticationPrincipal UserDetails userDetails,
-            @RequestParam(name = "genre_id", required = false) Long genreId,
-            @RequestParam(name = "js", defaultValue = "false") Boolean js
+            @RequestParam(name = "genre_id", required = false) Long genreId
     ) {
         if (userDetails != null) {
             setAdmin(model, userDetails);
@@ -45,22 +68,22 @@ public class BooksController {
         model.addAttribute("genreId", genreId);
         model.addAttribute("genreService", genreService);
         model.addAttribute("genres", genreService.getGenreList());
+
+        // TODO: 25.05.2022 непонятно почему, но js поломался, пока с повтором кода будет
         List<BookDto> books;
         if (genreId == null) {
             books = bookService.getAllBooks();
         } else {
             books = bookService.getBooksByGenre(genreId);
         }
+
         model.put("isBooksExists", !books.isEmpty());
+
         if (books.isEmpty()) {
             books = bookRepository.getAllBooksWhichInFavourite().stream().map(BookDto::from).collect(Collectors.toList());
         }
+
         model.addAttribute("list", books);
-
-        if (js) {
-            return "books/book_list";
-        }
-
         return "books/books";
     }
 
