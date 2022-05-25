@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Не найдено</title>
 </head>
-<body>
-<h1>Ошибка ${exception.status}. ${exception.className} не найден.</h1>
+<body style="color: red">
+ОШИБКА
+<#--<h1>Ошибка ${exception.status}. ${exception.className} не найден.</h1>-->
 </body>
 </html>

@@ -14,11 +14,12 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Query(
-            nativeQuery = true,
-            value = "SELECT * FROM book " +
-                    "WHERE genre_id = :id"
+            "SELECT b FROM Book b " +
+                    "WHERE b.genre.id = :id"
     )
-    List<Book> findAllByGenreId(Long id);
+    List<Book> findAllByGenreId(
+            @Param("id") Long id
+    );
 
     @Modifying
     @Transactional
@@ -46,11 +47,22 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     );
 
     @Query(
-            nativeQuery = true,
-            value = "SELECT content_file_name " +
-                    "FROM book " +
-                    "WHERE id = :book_id"
+            "SELECT b.contentFileName " +
+                    "FROM Book b " +
+                    "WHERE b.id = :book_id"
     )
-    String getBookContentFileNameById(@Param("book_id") Long bookId);
+    String getBookContentFileNameById(
+            @Param("book_id") Long bookId
+    );
 
+    @Query(
+            "SELECT b " +
+                    "FROM Book b " +
+                    "WHERE b.id " +
+                    "IN (" +
+                    "SELECT f.book_id " +
+                    "FROM FavouriteBooks f" +
+                    ")"
+    )
+    List<Book> getAllBooksWhichInFavourite();
 }

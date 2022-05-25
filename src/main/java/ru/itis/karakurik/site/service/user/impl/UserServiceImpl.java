@@ -3,7 +3,6 @@ package ru.itis.karakurik.site.service.user.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.itis.karakurik.site.dto.auth.LoginForm;
 import ru.itis.karakurik.site.dto.auth.SignUpForm;
 import ru.itis.karakurik.site.exception.auth.OccupiedEmailException;
@@ -17,7 +16,6 @@ import ru.itis.karakurik.site.service.user.interfaces.UserService;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -71,14 +69,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
+//    @Transactional
     public void changePassword(String email, String newPassword) {
         String hashPassword = passwordEncoder.encode(newPassword);
-        Query query = em.createQuery(
-                "UPDATE User SET hashPassword = :hashPassword WHERE email = :email");
-        query.setParameter("hashPassword", hashPassword);
-        query.setParameter("email", email);
-        int updateCount = query.executeUpdate();
-//        userRepository.changePassword(email, hashPassword);
+//        Query query = em.createQuery(
+//                "UPDATE User SET hashPassword = :hashPassword WHERE email = :email");
+//        query.setParameter("hashPassword", hashPassword);
+//        query.setParameter("email", email);
+//        int updateCount = query.executeUpdate();
+        userRepository.changePassword(email, hashPassword);
     }
 }

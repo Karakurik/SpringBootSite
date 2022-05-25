@@ -51,16 +51,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/books/**").permitAll()
                     .antMatchers("/test/**").permitAll()
                     .antMatchers("/showImage/**").permitAll()
-                    .antMatchers("/exception/**").permitAll()
+//                    .antMatchers("/exception/**").permitAll()
                     .antMatchers("/admin/**").hasAuthority(Role.ROLE_ADMIN.name())
-//                .antMatchers("/").authenticated()
+//                    .antMatchers("/").authenticated()
                     .antMatchers("/static/**").permitAll()
-//                .anyRequest().authenticated()
+                    .antMatchers("/templates/exception/**").permitAll()
+                    .anyRequest().authenticated()
+                    .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/accessDenied")
                     .and()
                     .formLogin()
                     .loginPage("/login")
                     .usernameParameter("email")
-                    .defaultSuccessUrl("/books") // TODO: 06.05.2022 default success url
+                    .defaultSuccessUrl("/books")
                     .and()
                     .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
@@ -89,5 +93,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Order(2)
     static class OAuth2SecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 
+//        @Override
+//        protected void configure(HttpSecurity http) throws Exception {
+//            http.authorizeRequests()
+//                    .antMatchers("/", "/login", "/oauth/**").permitAll()
+//                    .anyRequest().authenticated()
+//                    .and()
+//                    .formLogin().permitAll()
+//                    .and()
+//                    .oauth2Login()
+//                    .loginPage("/oauth/login")
+//                    .userInfoEndpoint()
+//                    .userService(oauthUserService);
+//        }
+//
+//        @Autowired
+//        private CustomOAuth2UserService oauthUserService;
     }
 }

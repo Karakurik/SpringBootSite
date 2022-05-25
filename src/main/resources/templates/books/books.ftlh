@@ -14,10 +14,12 @@
     </div>
 
     <div class="book_list">
-        <#if list?has_content >
+        <#if isBooksExists?? && isBooksExists = true >
             <h3>${RequestParameters.name!}</h3>
         <#else>
-            <h3 style="color:red;">По запросу "${RequestParameters.name!}${RequestParameters.search_string!}" книги не найдены</h3>
+            <h3 style="color:red;">По запросу "${RequestParameters.name!}${RequestParameters.search_string!}" книги не
+                найдены</h3>
+            <h3>Мы рекомендуем вам прочитать эти книги</h3>
         </#if>
 
         <#list list as book>

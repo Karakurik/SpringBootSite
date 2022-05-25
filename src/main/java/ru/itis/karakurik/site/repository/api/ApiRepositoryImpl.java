@@ -10,12 +10,21 @@ import java.io.IOException;
 
 @Repository
 public class ApiRepositoryImpl implements ApiRepository {
+    private static final String BASE_URL = "https://pwv2r8.api.infobip.com";
+    private static final String REDIRECT_URL = "http://localhost/changePassword";
+    private static final String API_KEY = "App 0b5a60c6564eab0c64ffb29defc7e8f3-917124f8-b15b-409a-8255-e02055bcd844";
 
+    private static final String SENDER_EMAIL_ADDRESS = "karakurik@selfserviceib.com";
+    private static final String RECIPIENT_EMAIL_ADDRESS = "bycfasdf@gmail.com";
+
+    private static final String EMAIL_SUBJECT = "Восcтановление пароля";
+    private static final String EMAIL_TEXT = "Для восстановления паролся перейдите по ссылке:\n";
     @Autowired
     OkHttpClient okHttpClient;
 
     @Autowired
     Logger logger;
+
 
     @Override
     public void sendSms(String to, String message) {
@@ -30,6 +39,7 @@ public class ApiRepositoryImpl implements ApiRepository {
         Request request = prepareHttpRequest(body);
         try {
             Response okHttpResponse = okHttpClient.newCall(request).execute();
+            // TODO: 25.05.2022 тут бы спарсить в дата класс 
 //            ru.itis.karakurik.site.dto.api.Response response
 //                    = new Gson().fromJson(okHttpResponse.body().toString(), ru.itis.karakurik.site.dto.api.Response.class);
 //            if (response.getMessages().get(0).getStatuses().get(0).getGroupName().equals("PENDING")) {
@@ -45,33 +55,6 @@ public class ApiRepositoryImpl implements ApiRepository {
             throw new ApiException(e);
         }
 
-    }
-
-    private static final String BASE_URL = "https://pwv2r8.api.infobip.com";
-    private static final String REDIRECT_URL = "http://localhost/changePassword";
-    private static final String API_KEY = "App 0b5a60c6564eab0c64ffb29defc7e8f3-917124f8-b15b-409a-8255-e02055bcd844";
-
-    private static final String SENDER_EMAIL_ADDRESS = "karakurik@selfserviceib.com";
-    private static final String RECIPIENT_EMAIL_ADDRESS = "bycfasdf@gmail.com";
-
-    private static final String EMAIL_SUBJECT = "Восcтановление пароля";
-    private static final String EMAIL_TEXT = "Для восстановления паролся перейдите по ссылке:\n";
-
-    public static void main(String[] args) throws IOException {
-        OkHttpClient client = new OkHttpClient().newBuilder().build();
-
-        RequestBody body = new MultipartBody.Builder()
-                .setType(MultipartBody.FORM)
-                .addFormDataPart("from", SENDER_EMAIL_ADDRESS)
-                .addFormDataPart("to", RECIPIENT_EMAIL_ADDRESS)
-                .addFormDataPart("subject", EMAIL_SUBJECT)
-                .addFormDataPart("text", EMAIL_TEXT).build();
-
-        Request request = prepareHttpRequest(body);
-        Response response = client.newCall(request).execute();
-
-        System.out.println("HTTP status code: " + response.code());
-        System.out.println("Response body: " + response.body().string());
     }
 
     private static Request prepareHttpRequest(RequestBody body) {

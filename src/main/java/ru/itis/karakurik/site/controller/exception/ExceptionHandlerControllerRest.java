@@ -1,4 +1,4 @@
-package ru.itis.karakurik.site.controller.exceptionHandler;
+package ru.itis.karakurik.site.controller.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,21 +15,17 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @Slf4j
 @RestControllerAdvice
-public class ExceptionHandlerResponseRest extends ResponseEntityExceptionHandler {
+public class ExceptionHandlerControllerRest extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Response> handleException(Exception e) {
         Response response = new Response(e.getMessage());
-        log.error(e.toString());
-        log.error(e.getMessage());
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException e, HttpHeaders headers, HttpStatus status, WebRequest request) {
         Response response = new Response("Неправильный JSON", e.getMessage());
-        log.error(e.toString());
-        log.error(e.getMessage());
         return new ResponseEntity<>(response, status);
     }
 

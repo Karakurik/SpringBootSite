@@ -6,6 +6,7 @@ import ru.itis.karakurik.site.dto.books.BookDto;
 import ru.itis.karakurik.site.exception.books.BookNotFoundException;
 import ru.itis.karakurik.site.exception.books.FileDownloadException;
 import ru.itis.karakurik.site.exception.books.FileUploadException;
+import ru.itis.karakurik.site.model.books.Book;
 import ru.itis.karakurik.site.repository.BookRepository;
 import ru.itis.karakurik.site.service.books.interfaces.BookService;
 
@@ -82,6 +83,15 @@ public class BookServiceImpl implements BookService {
                 authorId,
                 publishDate,
                 publisherId
+        );
+    }
+
+    @Override
+    public void save(BookDto bookDto) {
+        bookRepository.save(
+                Book.builder()
+                        .isbn(bookDto.getIsbn())
+                        .build()
         );
     }
 }

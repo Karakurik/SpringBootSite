@@ -4,7 +4,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.format.FormatterRegistry;
@@ -24,7 +27,6 @@ import ru.itis.karakurik.site.converters.DateConverter;
 })
 @EntityScan(basePackages = "ru.itis.karakurik.site.model")
 @EnableJpaRepositories(basePackages = "ru.itis.karakurik.site.repository")
-@EnableAspectJAutoProxy
 @Import(NetworkConfig.class)
 public class ApplicationConfig implements WebMvcConfigurer {
 
@@ -60,22 +62,4 @@ public class ApplicationConfig implements WebMvcConfigurer {
     public void addFormatters(FormatterRegistry registry) {
         registry.addConverter(dateConverter());
     }
-
-//    @Bean
-//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(JpaVendorAdapter adapter,
-//                                                                       DataSource dataSource) {
-//        LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
-//        entityManagerFactory.setJpaVendorAdapter(adapter);
-//        entityManagerFactory.setDataSource(dataSource);
-//        entityManagerFactory.setPackagesToScan("ru.itis.karakurik.site.model");
-//
-//        return entityManagerFactory;
-//    }
-//
-//    @Bean
-//    public TransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-//        JpaTransactionManager manager = new JpaTransactionManager();
-//        manager.setEntityManagerFactory(entityManagerFactory);
-//        return manager;
-//    }
 }

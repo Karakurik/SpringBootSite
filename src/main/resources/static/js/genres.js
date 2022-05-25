@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function update(genre) {
-        let urlString = "books?id=" + genre.id + "&name=" + genre.name
+        let urlString = "books?id=" + genre.id + "&name=" + genre.name + "&js=true"
 
         this.ajax(
             {

@@ -4,13 +4,19 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.karakurik.site.dto.books.BookDto;
+import ru.itis.karakurik.site.dto.validation.ValidationErrorDto;
+import ru.itis.karakurik.site.dto.validation.ValidationExceptionResponse;
 import ru.itis.karakurik.site.service.books.interfaces.AuthorService;
 import ru.itis.karakurik.site.service.books.interfaces.BookService;
 import ru.itis.karakurik.site.service.books.interfaces.GenreService;
 import ru.itis.karakurik.site.service.books.interfaces.PublisherService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -64,7 +70,33 @@ public class AdminPanelRestController {
 
     @PostMapping("/add")
     public HttpStatus addBook(@RequestBody BookDto bookDto) {
-        // TODO: 22.05.2022
+        bookService.save(bookDto);
         return HttpStatus.OK;
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ValidationExceptionResponse handleException(MethodArgumentNotValidException exception) {
+        List<ValidationErrorDto> errors = new ArrayList<>();
+        exception.getBindingResult().getAllErrors().forEach((error) -> {
+
+            String errorMessage = error.getDefaultMessage();
+            ValidationErrorDto errorDto = ValidationErrorDto.builder()
+                    .message(errorMessage)
+                    .build();
+
+            if (error instanceof FieldError) {
+                String fieldName = ((FieldError) error).getField();
+                errorDto.setField(fieldName);
+            } else if (error instanceof ObjectError) {
+                String objectName = error.getObjectName();
+                errorDto.setObject(objectName);
+            }
+            errors.add(errorDto);
+        });
+
+        return ValidationExceptionResponse.builder()
+                .errors(errors)
+                .build();
     }
 }

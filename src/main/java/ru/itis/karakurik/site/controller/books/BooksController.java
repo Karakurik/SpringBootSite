@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.itis.karakurik.site.dto.books.BookDto;
 import ru.itis.karakurik.site.dto.books.SearchForm;
 import ru.itis.karakurik.site.model.user.Role;
+import ru.itis.karakurik.site.repository.BookRepository;
 import ru.itis.karakurik.site.service.books.interfaces.BookService;
 import ru.itis.karakurik.site.service.books.interfaces.GenreService;
-import ru.itis.karakurik.site.service.user.interfaces.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class BooksController {
     private final BookService bookService;
     private final GenreService genreService;
-    private final UserService userService;
+    private final BookRepository bookRepository;
 
     @GetMapping("/test")
     public String test() {
@@ -36,7 +36,8 @@ public class BooksController {
     public String getBooks(
             ModelMap model,
             @AuthenticationPrincipal UserDetails userDetails,
-            @RequestParam(name = "genre_id", required = false) Long genreId
+            @RequestParam(name = "genre_id", required = false) Long genreId,
+            @RequestParam(name = "js", defaultValue = "false") Boolean js
     ) {
         if (userDetails != null) {
             setAdmin(model, userDetails);
@@ -50,7 +51,15 @@ public class BooksController {
         } else {
             books = bookService.getBooksByGenre(genreId);
         }
+        model.put("isBooksExists", !books.isEmpty());
+        if (books.isEmpty()) {
+            books = bookRepository.getAllBooksWhichInFavourite().stream().map(BookDto::from).collect(Collectors.toList());
+        }
         model.addAttribute("list", books);
+
+        if (js) {
+            return "books/book_list";
+        }
 
         return "books/books";
     }
@@ -82,6 +91,11 @@ public class BooksController {
                 break;
             default:
                 books = new ArrayList<>();
+        }
+
+        model.put("isBooksExists", !books.isEmpty());
+        if (books.isEmpty()) {
+            books = bookRepository.getAllBooksWhichInFavourite().stream().map(BookDto::from).collect(Collectors.toList());
         }
 
         model.addAttribute("search_string", searchString);

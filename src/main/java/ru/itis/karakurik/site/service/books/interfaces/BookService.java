@@ -35,4 +35,6 @@ public interface BookService {
             Long authorId,
             int publishDate,
             Long publisherId);
+
+    void save(BookDto bookDto);
 }

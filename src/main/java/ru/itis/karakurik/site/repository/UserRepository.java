@@ -1,8 +1,10 @@
 package ru.itis.karakurik.site.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itis.karakurik.site.model.user.User;
 
 import java.util.Optional;
@@ -13,14 +15,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsUserByEmail(String email);
 
-    @Query(
-            nativeQuery = true,
-            value = "UPDATE library_user " +
-                    "SET hash_password = :hash_password " +
-                    "WHERE email =:email"
+    @Transactional
+    @Modifying
+    @Query("UPDATE User " +
+            "SET hashPassword = :hashPassword " +
+            "WHERE email = :email"
     )
-    User changePassword(
+    void changePassword(
             @Param("email") String email,
-            @Param("hash_password") String newHashPassword
+            @Param("hashPassword") String hashPassword
     );
 }
