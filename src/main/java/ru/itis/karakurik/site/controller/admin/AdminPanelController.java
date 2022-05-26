@@ -12,6 +12,7 @@ import ru.itis.karakurik.site.aspects.logging.Logger;
 import ru.itis.karakurik.site.dto.books.BookDto;
 import ru.itis.karakurik.site.service.books.interfaces.BookService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -30,21 +31,31 @@ public class AdminPanelController {
 
     @Logger
     @PostMapping("/insert")
-    public String insertBook(ModelMap modelMap) {
+    public String insertBook(
+            @Valid BookDto bookDto,
+            ModelMap modelMap
+    ) {
         modelMap.addAttribute("addNew", true);
-        return "admin/book_form";
+        bookService.save(bookDto);
+        return "redirect:/admin/books";
     }
 
     @Logger
     @PostMapping("/delete")
-    public String deleteBook(ModelMap modelMap) {
-        modelMap.addAttribute("addNew", true);
-        return "admin/book_form";
+    public String deleteBook(
+            ModelMap modelMap,
+            @RequestParam("id") Long id
+    ) {
+        bookService.deleteBook(id);
+        return "redirect:/admin/books";
     }
 
     @Logger
     @GetMapping("/edit")
-    public String showEditForm(Model model, @RequestParam Long id) {
+    public String showEditForm(
+            Model model,
+            @RequestParam("id") Long id
+    ) {
         BookDto bookDto = bookService.findById(id);
         model.addAttribute("update", true);
         model.addAttribute("book", bookDto);
@@ -53,9 +64,12 @@ public class AdminPanelController {
 
     @Logger
     @PostMapping("/update")
-    public String updateBook(ModelMap modelMap) {
-        modelMap.addAttribute("addNew", true);
-        return "admin/book_form";
+    public String updateBook(
+            @Valid BookDto bookDto,
+            ModelMap modelMap
+    ) {
+        bookService.save(bookDto);
+        return "redirect:/admin/books";
     }
 
     @Logger
