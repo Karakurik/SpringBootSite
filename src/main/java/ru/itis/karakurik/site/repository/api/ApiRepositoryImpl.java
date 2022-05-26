@@ -10,6 +10,7 @@ import java.io.IOException;
 
 @Repository
 public class ApiRepositoryImpl implements ApiRepository {
+
     private static final String BASE_URL = "https://pwv2r8.api.infobip.com";
     private static final String REDIRECT_URL = "http://localhost/changePassword";
     private static final String API_KEY = "App 0b5a60c6564eab0c64ffb29defc7e8f3-917124f8-b15b-409a-8255-e02055bcd844";
@@ -19,6 +20,7 @@ public class ApiRepositoryImpl implements ApiRepository {
 
     private static final String EMAIL_SUBJECT = "Восcтановление пароля";
     private static final String EMAIL_TEXT = "Для восстановления паролся перейдите по ссылке:\n";
+
     @Autowired
     OkHttpClient okHttpClient;
 
@@ -33,7 +35,7 @@ public class ApiRepositoryImpl implements ApiRepository {
                 .setType(MultipartBody.FORM)
                 .addFormDataPart("from", SENDER_EMAIL_ADDRESS)
                 .addFormDataPart("to", to)
-                .addFormDataPart("subject", "Восстановление пароля")
+                .addFormDataPart("subject", EMAIL_SUBJECT)
                 .addFormDataPart("text", message).build();
 
         Request request = prepareHttpRequest(body);
