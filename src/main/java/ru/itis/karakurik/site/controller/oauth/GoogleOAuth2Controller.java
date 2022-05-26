@@ -8,7 +8,7 @@ import ru.itis.karakurik.site.aspects.logging.Logger;
 class GoogleOAuth2Controller {
 
     @Logger
-    @GetMapping("/googleOAuth2")
+    @GetMapping("/oauth/google")
     public String googleOAuth2() {
         return "redirect:/books";
     }

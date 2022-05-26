@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import ru.itis.karakurik.site.exception.user.UserNotFoundException;
-import ru.itis.karakurik.site.repository.UserRepository;
+import ru.itis.karakurik.site.repository.jpa.UserRepository;
 
 @Component
 @RequiredArgsConstructor

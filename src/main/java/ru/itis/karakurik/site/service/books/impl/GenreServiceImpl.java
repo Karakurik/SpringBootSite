@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.itis.karakurik.site.dto.books.GenreDto;
 import ru.itis.karakurik.site.exception.books.GenreNotFoundException;
-import ru.itis.karakurik.site.repository.GenreRepository;
+import ru.itis.karakurik.site.repository.jpa.GenreRepository;
 import ru.itis.karakurik.site.service.books.interfaces.GenreService;
 
 import java.util.List;

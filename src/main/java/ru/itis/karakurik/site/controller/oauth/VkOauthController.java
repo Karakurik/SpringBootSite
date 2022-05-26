@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class VkOauthController {
 
-    @GetMapping("/vk")
+    @GetMapping("/oauth/vk")
     public String loginByVk(
             @Param("code") String code
     ) {

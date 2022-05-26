@@ -1,4 +1,4 @@
-package ru.itis.karakurik.site.repository;
+package ru.itis.karakurik.site.repository.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.itis.karakurik.site.model.books.Genre;

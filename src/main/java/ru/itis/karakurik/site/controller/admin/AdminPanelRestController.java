@@ -8,6 +8,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import ru.itis.karakurik.site.aspects.logging.Logger;
 import ru.itis.karakurik.site.dto.books.BookDto;
 import ru.itis.karakurik.site.dto.validation.ValidationErrorDto;
 import ru.itis.karakurik.site.dto.validation.ValidationExceptionResponse;
@@ -29,12 +30,14 @@ public class AdminPanelRestController {
     private final AuthorService authorService;
     private final PublisherService publisherService;
 
+    @Logger
     @PatchMapping("/delete/{book-id}")
     public HttpStatus deleteBook(@PathVariable("book-id") Long id) {
         bookService.deleteBook(id);
         return HttpStatus.OK;
     }
 
+    @Logger
     @PutMapping("/edit/{book-id}")
     public HttpStatus editBook(
             @PathVariable("book-id") Long id,
@@ -56,6 +59,7 @@ public class AdminPanelRestController {
         return HttpStatus.OK;
     }
 
+    @Logger
     @GetMapping("/")
     public ResponseEntity<List<BookDto>> getAllBooks() {
         List<BookDto> books = bookService.getAllBooks();
@@ -68,12 +72,14 @@ public class AdminPanelRestController {
         }
     }
 
+    @Logger
     @PostMapping("/add")
     public HttpStatus addBook(@RequestBody BookDto bookDto) {
         bookService.save(bookDto);
         return HttpStatus.OK;
     }
 
+    @Logger
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ValidationExceptionResponse handleException(MethodArgumentNotValidException exception) {

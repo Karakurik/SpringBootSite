@@ -9,10 +9,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.itis.karakurik.site.aspects.logging.Logger;
 import ru.itis.karakurik.site.dto.books.BookDto;
 import ru.itis.karakurik.site.dto.books.SearchForm;
 import ru.itis.karakurik.site.model.user.Role;
-import ru.itis.karakurik.site.repository.BookRepository;
+import ru.itis.karakurik.site.repository.jpa.BookRepository;
 import ru.itis.karakurik.site.service.books.interfaces.BookService;
 import ru.itis.karakurik.site.service.books.interfaces.GenreService;
 
@@ -27,11 +28,7 @@ public class BooksController {
     private final GenreService genreService;
     private final BookRepository bookRepository;
 
-    @GetMapping("/test")
-    public String test() {
-        return "books/books";
-    }
-
+    @Logger
     @GetMapping("/books/genre")
     public String getAllBooks(
             ModelMap map,
@@ -56,7 +53,8 @@ public class BooksController {
         return "books/book_list";
     }
 
-    @GetMapping("/books")
+    @Logger
+    @GetMapping({"/books", "/"})
     public String getBooks(
             ModelMap model,
             @AuthenticationPrincipal UserDetails userDetails,
@@ -87,6 +85,7 @@ public class BooksController {
         return "books/books";
     }
 
+    @Logger
     @PostMapping("/books")
     public String getBooksSearch(
             ModelMap model,

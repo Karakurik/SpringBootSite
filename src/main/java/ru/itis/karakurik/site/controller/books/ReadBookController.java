@@ -25,11 +25,9 @@ public class ReadBookController {
             String contentFileName = bookService.getBookContentFileNameById(bookId);
             response.setHeader("Content-Disposition", "filename=\"" + contentFileName + "\"");
             Files.copy(Paths.get("src/main/resources/static/files/" + contentFileName), out);
-//            bookService.downloadFile(contentFileName, out);
         } catch (IOException e) {
             response.setContentType("text/html");
             request.setAttribute("message", "Не удалось открыть файл");
-//            request.getRequestDispatcher("/pages/readBook.jsp").forward(request, response);
         }
     }
 }

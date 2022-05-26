@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.itis.karakurik.site.dto.books.PublisherDto;
 import ru.itis.karakurik.site.exception.books.PublisherNotFoundException;
-import ru.itis.karakurik.site.repository.PublisherRepository;
+import ru.itis.karakurik.site.repository.jpa.PublisherRepository;
 import ru.itis.karakurik.site.service.books.interfaces.PublisherService;
 
 import java.util.List;

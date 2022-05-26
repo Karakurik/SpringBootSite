@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.itis.karakurik.site.aspects.logging.Logger;
 import ru.itis.karakurik.site.dto.auth.SignUpForm;
 import ru.itis.karakurik.site.service.user.interfaces.UserService;
 import ru.itis.karakurik.site.service.validation.interfaces.ValidationService;
@@ -20,11 +21,13 @@ public class SignUpController {
 
     private final ValidationService validationService;
 
+    @Logger
     @GetMapping(value = "/signUp")
     public String getSignUpPage() {
         return "registration/signUp";
     }
 
+    @Logger
     @PostMapping(value = "/signUp")
     public String signUp(@Valid SignUpForm form, BindingResult bindingResult, ModelMap map) {
         if (bindingResult.hasErrors()) {

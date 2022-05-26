@@ -25,6 +25,7 @@ public class ChangePasswordController {
     private final ValidationService validationService;
     private final UserService userService;
 
+    @Logger
     @GetMapping("/resetPassword")
     public String getBookInfo() {
         return "registration/reset_password";
@@ -54,12 +55,14 @@ public class ChangePasswordController {
         }
     }
 
+    @Logger
     @GetMapping("/changePassword")
     public String changePassword(@RequestParam("token") String token, ModelMap modelMap) {
         modelMap.addAttribute("token", token);
         return "registration/change_password";
     }
 
+    @Logger
     @PostMapping("/changePassword")
     public String changePassword(@Valid NewPasswordForm newPasswordForm, BindingResult bindingResult, ModelMap map) {
         if (bindingResult.hasErrors()) {

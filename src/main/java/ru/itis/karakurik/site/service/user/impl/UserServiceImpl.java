@@ -11,7 +11,7 @@ import ru.itis.karakurik.site.exception.user.UserNotFoundException;
 import ru.itis.karakurik.site.model.user.Role;
 import ru.itis.karakurik.site.model.user.State;
 import ru.itis.karakurik.site.model.user.User;
-import ru.itis.karakurik.site.repository.UserRepository;
+import ru.itis.karakurik.site.repository.jpa.UserRepository;
 import ru.itis.karakurik.site.service.user.interfaces.UserService;
 
 import javax.persistence.EntityManager;

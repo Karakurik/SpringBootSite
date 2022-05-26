@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.itis.karakurik.site.dto.books.AuthorDto;
 import ru.itis.karakurik.site.exception.books.AuthorNotFoundException;
-import ru.itis.karakurik.site.repository.AuthorRepository;
+import ru.itis.karakurik.site.repository.jpa.AuthorRepository;
 import ru.itis.karakurik.site.service.books.interfaces.AuthorService;
 
 import java.util.List;
